@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as ort from "onnxruntime-web";
 
  ort.env.wasm.wasmPaths = {
-    wasm: `${window.location}/ort/ort-wasm-simd-threaded.wasm`,
-    mjs:`${window.location}/ort/ort-wasm-simd-threaded.mjs`,
+    wasm: `${window.location}ort/ort-wasm-simd-threaded.wasm`,
+    mjs:`${window.location}ort/ort-wasm-simd-threaded.mjs`,
 };
 
 const App = () => {
