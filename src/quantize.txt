@@ -1,0 +1,21 @@
+# 1. Install the tools if you haven't already
+!pip install onnxslim -q
+
+# 2. Use onnxslim to fix the "312 vs 4" shape mismatch
+# This 'cleans' the model so the quantizer doesn't crash
+print("Cleaning model architecture...")
+!onnxslim intent_model_single.onnx intent_model_slimmed.onnx
+
+# 3. Now quantize the cleaned version
+print("Shrinking to 15MB...")
+import onnx
+from onnxruntime.quantization import quantize_dynamic, QuantType
+
+quantize_dynamic(
+    model_input="intent_model_slimmed.onnx",
+    model_output="intent_model_tiny.onnx",
+    weight_type=QuantType.QUInt8
+)
+
+print("---")
+print("SUCCESS! Refresh the sidebar and download 'intent_model_tiny.onnx'")
